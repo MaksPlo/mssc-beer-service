@@ -6,10 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -22,7 +20,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDto {
+public class BeerDto implements Serializable {
+
+    static final long serialVersionUID = -5815566940065181210L;
 
     @Null
     private UUID id;
@@ -49,6 +49,7 @@ public class BeerDto {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Positive
+    @Max(value = 25)
     @NotNull
     private BigDecimal price;
 
